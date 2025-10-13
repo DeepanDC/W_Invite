@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 
 // --- RSVP Backend ---
@@ -29,6 +28,7 @@ const UploadIcon: React.FC<{ className?: string }> = ({ className }) => (<svg xm
 const RingsIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6.75 6.75 0 006.75-6.75H5.25A6.75 6.75 0 0012 18.75z" /></svg>);
 const CameraIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>);
 const FoodIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" /></svg>);
+const BusIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" /></svg>);
 
 const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) => (
     <div className="flex flex-col items-center justify-center w-16 sm:w-20">
@@ -112,6 +112,13 @@ function App() {
         { icon: <FoodIcon />, time: "8:30 AM onwards", title: "Wedding Breakfast", description: "Enjoy a delicious traditional breakfast with us." }
     ];
 
+    const busRoutes = [
+        { number: "70", route: "Koyambedu (CMBT) to Avadi" },
+        { number: "40A", route: "Anna Square to Avadi" },
+        { number: "65B", route: "Parrys Corner to Avadi" },
+        { number: "121G", route: "Tambaram to Avadi" },
+    ];
+
     return (
         <div className="min-h-screen w-full bg-no-repeat bg-cover bg-center bg-fixed relative" style={{ backgroundImage: `url('Picsart_25-10-06_05-26-07-931.png')` }}>
             <div className={`absolute inset-0 bg-gradient-to-b from-transparent ${theme === 'light' ? 'via-white/20 to-white/50' : 'via-black/10 to-black/40'}`}></div>
@@ -169,8 +176,32 @@ function App() {
                         </div>
                     </div>
 
-                    {/* --- RSVP & GUESTBOOK CARD --- */}
+                    {/* --- GETTING THERE BY BUS --- */}
                     <div className="pt-8 animate-fade-in delay-1400">
+                        <div className="glass-card p-6 sm:p-8 space-y-6">
+                            <div className="flex items-center justify-center gap-4">
+                                <BusIcon />
+                                <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Getting There</h2>
+                            </div>
+                            <p className="text-secondary text-base">
+                                For guests traveling by public transport, several bus routes stop near the temple. Here are a few options:
+                            </p>
+                            <div className="text-left space-y-3">
+                                {busRoutes.map((route, index) => (
+                                    <div key={index} className="flex items-center gap-4">
+                                        <span className="font-bold text-lg bg-primary/10 text-primary rounded-full w-12 h-12 flex items-center justify-center">{route.number}</span>
+                                        <span className="text-secondary font-medium">{route.route}</span>
+                                    </div>
+                                ))}
+                            </div>
+                             <p className="text-secondary/80 text-sm pt-2">
+                                Please check the latest bus schedules and routes from your location. We recommend using a map app for the final stop details.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* --- RSVP & GUESTBOOK CARD --- */}
+                    <div className="pt-8 animate-fade-in delay-1600">
                         <div className="glass-card p-6 sm:p-8 space-y-8">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Our Guestbook & RSVP</h2>
                             {isSubmitted ? (
@@ -188,7 +219,7 @@ function App() {
                      </div>
 
                     {/* --- SHARE YOUR MEMORIES CARD --- */}
-                     <div className="pt-8 animate-fade-in delay-1600">
+                     <div className="pt-8 animate-fade-in delay-1800">
                         <div className="glass-card p-6 sm:p-8 space-y-6">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Share Your Memories</h2>
                             <p className="text-secondary text-lg">

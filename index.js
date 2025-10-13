@@ -16,6 +16,8 @@ const UploadIcon = ({ className }) => (React.createElement("svg", { xmlns: "http
 const RingsIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.364 5.636a9 9 0 010 12.728m0 0A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" }), React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 18.75a6.75 6.75 0 006.75-6.75H5.25A6.75 6.75 0 0012 18.75z" })));
 const CameraIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" }), React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" })));
 const FoodIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" })));
+const BusIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: "1.5" }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.375 2.25c-1.898 0-3.68.74-5.006 2.065A7.485 7.485 0 0012 5.25a7.485 7.485 0 00-1.369-.935C9.303 3.01 7.518 2.25 5.625 2.25c-1.898 0-3.68.74-5.006 2.065A7.485 7.485 0 000 5.25v13.5A2.25 2.25 0 002.25 21h19.5A2.25 2.25 0 0024 18.75V5.25a7.485 7.485 0 00-1.369-.935C21.303 3.01 19.518 2.25 18.375 2.25zM4.5 6.375a.375.375 0 01.375-.375h.375a.375.375 0 01.375.375v.375a.375.375 0 01-.375.375h-.375a.375.375 0 01-.375-.375v-.375zM9 6.375a.375.375 0 01.375-.375h.375a.375.375 0 01.375.375v.375a.375.375 0 01-.375.375H9.375a.375.375 0 01-.375-.375v-.375zm5.625 0a.375.375 0 01.375-.375h.375a.375.375 0 01.375.375v.375a.375.375 0 01-.375.375h-.375a.375.375 0 01-.375-.375v-.375zM19.5 6.375a.375.375 0 01.375-.375h.375a.375.375 0 01.375.375v.375a.375.375 0 01-.375.375h-.375a.375.375 0 01-.375-.375v-.375zM4.5 15.75a.75.75 0 01.75-.75h13.5a.75.75 0 010 1.5H5.25a.75.75 0 01-.75-.75z" })));
+
 
 const TimeBox = ({ value, label }) => (React.createElement("div", { className: "flex flex-col items-center justify-center w-16 sm:w-20" }, React.createElement("span", { className: "text-2xl sm:text-3xl font-bold text-secondary" }, value.toString().padStart(2, '0')), React.createElement("span", { className: "text-xs sm:text-sm uppercase tracking-wider text-primary" }, label)));
 
@@ -94,6 +96,13 @@ function App() {
         { icon: React.createElement(FoodIcon), time: "8:30 AM onwards", title: "Wedding Breakfast", description: "Enjoy a delicious traditional breakfast with us." }
     ];
 
+    const busRoutes = [
+        { number: "70", route: "Koyambedu (CMBT) to Avadi" },
+        { number: "40A", route: "Anna Square to Avadi" },
+        { number: "65B", route: "Parrys Corner to Avadi" },
+        { number: "121G", route: "Tambaram to Avadi" },
+    ];
+
     return (
         React.createElement("div", { className: "min-h-screen w-full bg-no-repeat bg-cover bg-center bg-fixed relative", style: { backgroundImage: `url('Picsart_25-10-06_05-26-07-931.png')` } },
             React.createElement("div", { className: `absolute inset-0 bg-gradient-to-b from-transparent ${theme === 'light' ? 'via-white/20 to-white/50' : 'via-black/10 to-black/40'}` }),
@@ -146,6 +155,24 @@ function App() {
                         )
                     ),
                     React.createElement("div", { className: "pt-8 animate-fade-in delay-1400" },
+                        React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
+                            React.createElement("div", { className: "flex items-center justify-center gap-4" },
+                                React.createElement(BusIcon),
+                                React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Getting There")
+                            ),
+                            React.createElement("p", { className: "text-secondary text-base" }, "For guests traveling by public transport, several bus routes stop near the temple. Here are a few options:"),
+                            React.createElement("div", { className: "text-left space-y-3" },
+                                busRoutes.map((route, index) => (
+                                    React.createElement("div", { key: index, className: "flex items-center gap-4" },
+                                        React.createElement("span", { className: "font-bold text-lg bg-primary/10 text-primary rounded-full w-12 h-12 flex items-center justify-center" }, route.number),
+                                        React.createElement("span", { className: "text-secondary font-medium" }, route.route)
+                                    )
+                                ))
+                            ),
+                             React.createElement("p", { className: "text-secondary/80 text-sm pt-2" }, "Please check the latest bus schedules and routes from your location. We recommend using a map app for the final stop details.")
+                        )
+                    ),
+                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1600" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-8" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Our Guestbook & RSVP"),
                             isSubmitted ? (
@@ -161,7 +188,7 @@ function App() {
                             React.createElement("div", { className: "pt-4" }, isLoadingRsvps ? React.createElement("p", { className: "text-secondary" }, "Loading responses...") : fetchError ? React.createElement("p", { className: "text-red-500" }, fetchError) : (React.createElement("div", null, React.createElement("div", { className: "guest-list-tabs" }, React.createElement("div", { onClick: () => setActiveTab('attending'), className: `guest-list-tab ${activeTab === 'attending' ? 'active' : ''}` }, "Attending (", attending.length, ")"), React.createElement("div", { onClick: () => setActiveTab('regrets'), className: `guest-list-tab ${activeTab === 'regrets' ? 'active' : ''}` }, "Sending Wishes (", regrets.length, ")")), React.createElement("div", { className: "pt-4 text-center" }, activeTab === 'attending' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, attending.length > 0 ? attending.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "Be the first to RSVP!"))), activeTab === 'regrets' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, regrets.length > 0 ? regrets.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "No regrets yet!")))))))
                         )
                     ),
-                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1600" },
+                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1800" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Share Your Memories"),
                             React.createElement("p", { className: "text-secondary text-lg" }, "Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder."),
