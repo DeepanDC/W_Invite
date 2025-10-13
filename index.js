@@ -1,3 +1,4 @@
+
 const { useState, useEffect, useCallback } = React;
 
 // --- RSVP Backend ---
@@ -12,11 +13,14 @@ const CheckCircleIcon = ({ className }) => (React.createElement("svg", { xmlns: 
 const SunIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" })));
 const MoonIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" })));
 const UploadIcon = ({ className }) => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: className, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 2 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" })));
+const RingsIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.364 5.636a9 9 0 010 12.728m0 0A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" }), React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M12 18.75a6.75 6.75 0 006.75-6.75H5.25A6.75 6.75 0 0012 18.75z" })));
+const CameraIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" }), React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" })));
+const FoodIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" })));
 
 const TimeBox = ({ value, label }) => (React.createElement("div", { className: "flex flex-col items-center justify-center w-16 sm:w-20" }, React.createElement("span", { className: "text-2xl sm:text-3xl font-bold text-secondary" }, value.toString().padStart(2, '0')), React.createElement("span", { className: "text-xs sm:text-sm uppercase tracking-wider text-primary" }, label)));
 
 function App() {
-    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Thiruverkadu+Temple,+Chennai';
+    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Guruvayurappan+Temple,+Poompozhil+Nagar,+Avadi,+Tamil+Nadu+600054';
     const sharedAlbumUrl = 'https://drive.google.com/drive/folders/1a1LvcI5VScaN73-m7ii_X7u7Nmr2kS5U';
     
     // RSVP State
@@ -42,7 +46,7 @@ function App() {
 
     // Countdown Timer
     const calculateTimeLeft = useCallback(() => {
-        const weddingDate = new Date('2025-12-14T06:30:00').getTime();
+        const weddingDate = new Date('2025-11-30T06:30:00').getTime();
         const difference = weddingDate - new Date().getTime();
         if (difference > 0) return { days: Math.floor(difference / 86400000), hours: Math.floor(difference / 3600000) % 24, minutes: Math.floor(difference / 60000) % 60, seconds: Math.floor(difference / 1000) % 60 };
         return null;
@@ -84,6 +88,12 @@ function App() {
     const attending = rsvpList.filter(r => r.status === 'yes');
     const regrets = rsvpList.filter(r => r.status === 'no');
 
+    const scheduleItems = [
+        { icon: React.createElement(RingsIcon), time: "6:30 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
+        { icon: React.createElement(CameraIcon), time: "7:30 AM - 8:30 AM", title: "Photo Session", description: "Join us for photos to capture the memories of our special day." },
+        { icon: React.createElement(FoodIcon), time: "8:30 AM onwards", title: "Wedding Breakfast", description: "Enjoy a delicious traditional breakfast with us." }
+    ];
+
     return (
         React.createElement("div", { className: "min-h-screen w-full bg-no-repeat bg-cover bg-center bg-fixed relative", style: { backgroundImage: `url('Picsart_25-10-06_05-26-07-931.png')` } },
             React.createElement("div", { className: `absolute inset-0 bg-gradient-to-b from-transparent ${theme === 'light' ? 'via-white/20 to-white/50' : 'via-black/10 to-black/40'}` }),
@@ -102,21 +112,40 @@ function App() {
                         React.createElement("div", { className: "animate-fade-in delay-1000" },
                             React.createElement(OrnateDivider, null),
                             React.createElement("div", { className: "space-y-2 text-base sm:text-lg font-semibold text-secondary" },
-                                React.createElement("p", null, "Sunday, 14th December 2025"),
-                                React.createElement("p", null, "Ceremony between 6:30 am to 7:30 am")
+                                React.createElement("p", null, "Sunday, 30th November 2025")
                             ),
                             React.createElement("div", { className: "py-8" },
                                 timeLeft ? (React.createElement("div", { className: "flex justify-center gap-2 sm:gap-4" }, React.createElement(TimeBox, { value: timeLeft.days, label: "Days" }), React.createElement(TimeBox, { value: timeLeft.hours, label: "Hours" }), React.createElement(TimeBox, { value: timeLeft.minutes, label: "Minutes" }), React.createElement(TimeBox, { value: timeLeft.seconds, label: "Seconds" })))
                                 : (React.createElement("p", { className: "text-xl font-semibold text-primary" }, "The big day is here!"))
                             ),
                             React.createElement("div", { className: "space-y-1 text-secondary" },
-                                React.createElement("p", { className: "text-lg sm:text-xl font-bold tracking-wide" }, "Thiruverkadu Temple"),
-                                React.createElement("p", { className: "text-sm sm:text-base" }, "Thiruverkadu, Chennai - 600077")
+                                React.createElement("p", { className: "text-lg sm:text-xl font-bold tracking-wide" }, "Guruvayurappan Temple"),
+                                React.createElement("p", { className: "text-sm sm:text-base" }, "Poompozhil Nagar, Avadi, Tamil Nadu 600054")
                             ),
                             React.createElement("div", { className: "pt-8" }, React.createElement("a", { href: googleMapsUrl, target: "_blank", rel: "noopener noreferrer", className: "inline-flex items-center justify-center btn-primary" }, React.createElement(MapPinIcon, null), " View Location"))
                         )
                     ),
                     React.createElement("div", { className: "pt-8 animate-fade-in delay-1200" },
+                        React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
+                            React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Schedule of Events"),
+                            React.createElement("div", { className: "space-y-6 text-left" },
+                                scheduleItems.map((item, index) => (
+                                    React.createElement("div", { key: index, className: "flex items-start gap-4" },
+                                        React.createElement("div", { className: "flex flex-col items-center" },
+                                            item.icon,
+                                            index < scheduleItems.length - 1 && React.createElement("div", { className: "w-px h-12 bg-primary/30 mt-2" })
+                                        ),
+                                        React.createElement("div", null,
+                                            React.createElement("p", { className: "font-bold text-lg text-secondary" }, item.time),
+                                            React.createElement("h3", { className: "font-semibold text-xl text-primary" }, item.title),
+                                            React.createElement("p", { className: "text-secondary/90" }, item.description)
+                                        )
+                                    )
+                                ))
+                            )
+                        )
+                    ),
+                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1400" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-8" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Our Guestbook & RSVP"),
                             isSubmitted ? (
@@ -132,7 +161,7 @@ function App() {
                             React.createElement("div", { className: "pt-4" }, isLoadingRsvps ? React.createElement("p", { className: "text-secondary" }, "Loading responses...") : fetchError ? React.createElement("p", { className: "text-red-500" }, fetchError) : (React.createElement("div", null, React.createElement("div", { className: "guest-list-tabs" }, React.createElement("div", { onClick: () => setActiveTab('attending'), className: `guest-list-tab ${activeTab === 'attending' ? 'active' : ''}` }, "Attending (", attending.length, ")"), React.createElement("div", { onClick: () => setActiveTab('regrets'), className: `guest-list-tab ${activeTab === 'regrets' ? 'active' : ''}` }, "Sending Wishes (", regrets.length, ")")), React.createElement("div", { className: "pt-4 text-center" }, activeTab === 'attending' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, attending.length > 0 ? attending.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "Be the first to RSVP!"))), activeTab === 'regrets' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, regrets.length > 0 ? regrets.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "No regrets yet!")))))))
                         )
                     ),
-                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1400" },
+                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1600" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Share Your Memories"),
                             React.createElement("p", { className: "text-secondary text-lg" }, "Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder."),

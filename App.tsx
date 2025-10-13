@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 
 // --- RSVP Backend ---
@@ -19,13 +20,15 @@ const AnimatedFloralBackground: React.FC<{ direction: 'up' | 'down' }> = ({ dire
     </div>
 );
 
-
 const MapPinIcon: React.FC = () => ( <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg> );
 const OrnateDivider: React.FC<{ className?: string; style?: React.CSSProperties }> = ({ className, style }) => ( <div className={`py-6 text-center text-primary ${className || ''}`} style={style}><svg width="150" height="30" viewBox="0 0 150 30" className="inline-block" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 15H50" stroke="currentColor" strokeOpacity="0.6" strokeWidth="1.5"/><path d="M100 15H150" stroke="currentColor" strokeOpacity="0.6" strokeWidth="1.5"/><path d="M75 21C78.3137 21 81 18.3137 81 15C81 11.6863 78.3137 9 75 9C71.6863 9 69 11.6863 69 15C69 18.3137 71.6863 21 75 21Z" stroke="currentColor" strokeOpacity="0.8" strokeWidth="1.5"/><path d="M65.5 15C65.5 19.1421 69.8579 22.5 75 22.5C80.1421 22.5 84.5 19.1421 84.5 15C84.5 10.8579 80.1421 7.5 75 7.5C69.8579 7.5 65.5 10.8579 65.5 15Z" stroke="#FFBF00" strokeOpacity="0.7" strokeWidth="1"/><path d="M75 5V0M75 30V25M90 15H95M55 15H60" stroke="#FFBF00" strokeOpacity="0.6" strokeWidth="1" strokeLinecap="round"/></svg></div> );
 const CheckCircleIcon: React.FC<{ className?: string }> = ({ className }) => ( <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg> );
 const SunIcon: React.FC = () => ( <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg> );
 const MoonIcon: React.FC = () => ( <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg> );
 const UploadIcon: React.FC<{ className?: string }> = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>);
+const RingsIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6.75 6.75 0 006.75-6.75H5.25A6.75 6.75 0 0012 18.75z" /></svg>);
+const CameraIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>);
+const FoodIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" /></svg>);
 
 const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) => (
     <div className="flex flex-col items-center justify-center w-16 sm:w-20">
@@ -35,7 +38,7 @@ const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) =
 );
 
 function App() {
-    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Thiruverkadu+Temple,+Chennai';
+    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Guruvayurappan+Temple,+Poompozhil+Nagar,+Avadi,+Tamil+Nadu+600054';
     const sharedAlbumUrl = 'https://drive.google.com/drive/folders/1a1LvcI5VScaN73-m7ii_X7u7Nmr2kS5U';
     
     // RSVP State
@@ -61,7 +64,7 @@ function App() {
 
     // Countdown Timer
     const calculateTimeLeft = useCallback((): TimeLeft | null => {
-        const weddingDate = new Date('2025-12-14T06:30:00').getTime();
+        const weddingDate = new Date('2025-11-30T06:30:00').getTime();
         const difference = weddingDate - new Date().getTime();
         if (difference > 0) return { days: Math.floor(difference / 86400000), hours: Math.floor(difference / 3600000) % 24, minutes: Math.floor(difference / 60000) % 60, seconds: Math.floor(difference / 1000) % 60 };
         return null;
@@ -102,6 +105,12 @@ function App() {
     
     const attending = rsvpList.filter(r => r.status === 'yes');
     const regrets = rsvpList.filter(r => r.status === 'no');
+    
+    const scheduleItems = [
+        { icon: <RingsIcon />, time: "6:30 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
+        { icon: <CameraIcon />, time: "7:30 AM - 8:30 AM", title: "Photo Session", description: "Join us for photos to capture the memories of our special day." },
+        { icon: <FoodIcon />, time: "8:30 AM onwards", title: "Wedding Breakfast", description: "Enjoy a delicious traditional breakfast with us." }
+    ];
 
     return (
         <div className="min-h-screen w-full bg-no-repeat bg-cover bg-center bg-fixed relative" style={{ backgroundImage: `url('Picsart_25-10-06_05-26-07-931.png')` }}>
@@ -124,23 +133,44 @@ function App() {
                         <div className="animate-fade-in delay-1000">
                             <OrnateDivider />
                             <div className="space-y-2 text-base sm:text-lg font-semibold text-secondary">
-                                <p>Sunday, 14th December 2025</p>
-                                <p>Ceremony between 6:30 am to 7:30 am</p>
+                                <p>Sunday, 30th November 2025</p>
                             </div>
                             <div className="py-8">
                                 {timeLeft ? (<div className="flex justify-center gap-2 sm:gap-4"><TimeBox value={timeLeft.days} label="Days" /><TimeBox value={timeLeft.hours} label="Hours" /><TimeBox value={timeLeft.minutes} label="Minutes" /><TimeBox value={timeLeft.seconds} label="Seconds" /></div>) 
                                 : (<p className="text-xl font-semibold text-primary">The big day is here!</p>)}
                             </div>
                             <div className="space-y-1 text-secondary">
-                                <p className="text-lg sm:text-xl font-bold tracking-wide">Thiruverkadu Temple</p>
-                                <p className="text-sm sm:text-base">Thiruverkadu, Chennai - 600077</p>
+                                <p className="text-lg sm:text-xl font-bold tracking-wide">Guruvayurappan Temple</p>
+                                <p className="text-sm sm:text-base">Poompozhil Nagar, Avadi, Tamil Nadu 600054</p>
                             </div>
                             <div className="pt-8"><a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center btn-primary"><MapPinIcon /> View Location</a></div>
                         </div>
                     </div>
                     
-                    {/* --- RSVP & GUESTBOOK CARD --- */}
+                    {/* --- SCHEDULE OF EVENTS --- */}
                     <div className="pt-8 animate-fade-in delay-1200">
+                        <div className="glass-card p-6 sm:p-8 space-y-6">
+                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Schedule of Events</h2>
+                            <div className="space-y-6 text-left">
+                                {scheduleItems.map((item, index) => (
+                                    <div key={index} className="flex items-start gap-4">
+                                        <div className="flex flex-col items-center">
+                                            {item.icon}
+                                            {index < scheduleItems.length - 1 && <div className="w-px h-12 bg-primary/30 mt-2"></div>}
+                                        </div>
+                                        <div>
+                                            <p className="font-bold text-lg text-secondary">{item.time}</p>
+                                            <h3 className="font-semibold text-xl text-primary">{item.title}</h3>
+                                            <p className="text-secondary/90">{item.description}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* --- RSVP & GUESTBOOK CARD --- */}
+                    <div className="pt-8 animate-fade-in delay-1400">
                         <div className="glass-card p-6 sm:p-8 space-y-8">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Our Guestbook & RSVP</h2>
                             {isSubmitted ? (
@@ -158,7 +188,7 @@ function App() {
                      </div>
 
                     {/* --- SHARE YOUR MEMORIES CARD --- */}
-                     <div className="pt-8 animate-fade-in delay-1400">
+                     <div className="pt-8 animate-fade-in delay-1600">
                         <div className="glass-card p-6 sm:p-8 space-y-6">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Share Your Memories</h2>
                             <p className="text-secondary text-lg">
