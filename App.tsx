@@ -28,7 +28,7 @@ const UploadIcon: React.FC<{ className?: string }> = ({ className }) => (<svg xm
 const RingsIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6.75 6.75 0 006.75-6.75H5.25A6.75 6.75 0 0012 18.75z" /></svg>);
 const CameraIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>);
 const FoodIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" /></svg>);
-const BusIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" /></svg>);
+const BusIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" /></svg>);
 
 const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) => (
     <div className="flex flex-col items-center justify-center w-16 sm:w-20">
@@ -38,7 +38,7 @@ const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) =
 );
 
 function App() {
-    const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=Guruvayurappan+Temple,+Poompozhil+Nagar,+Avadi,+Tamil+Nadu+600054';
+    const googleMapsUrl = 'https://maps.app.goo.gl/upR92xf4KrvbUWUn8';
     const sharedAlbumUrl = 'https://drive.google.com/drive/folders/1a1LvcI5VScaN73-m7ii_X7u7Nmr2kS5U';
     
     // RSVP State
@@ -108,16 +108,31 @@ function App() {
     
     const scheduleItems = [
         { icon: <RingsIcon />, time: "6:30 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
-        { icon: <CameraIcon />, time: "7:30 AM - 8:30 AM", title: "Photo Session", description: "Join us for photos to capture the memories of our special day." },
-        { icon: <FoodIcon />, time: "8:30 AM onwards", title: "Wedding Breakfast", description: "Enjoy a delicious traditional breakfast with us." }
+        { icon: <CameraIcon />, time: "8:30 AM - 12:00 PM", title: "Photo Session", description: "Join us for photos to capture the memories of our special day." },
+        { icon: <FoodIcon />, time: "Starts from 7:30 AM", title: "Wedding Breakfast | Brunch", description: "Enjoy a delicious traditional breakfast with us." }
     ];
 
     const busRoutes = [
-        { number: "70", route: "Koyambedu (CMBT) to Avadi" },
-        { number: "40A", route: "Anna Square to Avadi" },
-        { number: "65B", route: "Parrys Corner to Avadi" },
-        { number: "121G", route: "Tambaram to Avadi" },
+        { number: "150", route: "Broadway to Avadi" },
+        { number: "565", route: "Sriperumbudur to Avadi Checkpost" },
+        { number: "62", route: "Poonamallee to Red Hills" },
+        { number: "41D", route: "Mandaveli to Avadi" },
+        { number: "73", route: "M.G.R. Koyambedu (C.M.B.T.) to Avadi" },
+        { number: "202", route: "Avadi to Tambaram" },
+        { number: "505", route: "Redhills to Thiruvallur" },
+        { number: "572", route: "Avadi Bus Depot to Thiruvallur Bus Station" },
+        { number: "65B", route: "Avadi to Poonamallee" },
+        { number: "65G", route: "Avadi to Meyyur" },
+        { number: "65H", route: "Avadi to Red Hills" },
+        { number: "71V", route: "Broadway to Veppampattu Eswaran Nagar" },
+        { number: "77V", route: "M.G.R. Koyambedu to Veppampattu" },
+        { number: "580M", route: "Avadi Bus Depot to Thirunindravoor" },
+        { number: "S47", route: "Avadi Bus Depot to Mittanamallee" },
+        { number: "S48", route: "Avadi Bus Depot to Siranjeevi Nagar" },
+        { number: "580S", route: "Avadi to Siruvapuri Temple" },
+        { number: "62T", route: "Variant of the 62 route" },
     ];
+
 
     return (
         <div className="min-h-screen w-full bg-no-repeat bg-cover bg-center bg-fixed relative" style={{ backgroundImage: `url('Picsart_25-10-06_05-26-07-931.png')` }}>
@@ -147,8 +162,8 @@ function App() {
                                 : (<p className="text-xl font-semibold text-primary">The big day is here!</p>)}
                             </div>
                             <div className="space-y-1 text-secondary">
-                                <p className="text-lg sm:text-xl font-bold tracking-wide">Guruvayurappan Temple</p>
-                                <p className="text-sm sm:text-base">Poompozhil Nagar, Avadi, Tamil Nadu 600054</p>
+                                <p className="text-lg sm:text-xl font-bold tracking-wide">V.K.K. Menon Convention Centre</p>
+                                <p className="text-sm sm:text-base">Giri Nagar, O.C.F. Estate, Avadi, Chennai - 600054</p>
                             </div>
                             <div className="pt-8"><a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center btn-primary"><MapPinIcon /> View Location</a></div>
                         </div>
@@ -184,12 +199,12 @@ function App() {
                                 <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Getting There</h2>
                             </div>
                             <p className="text-secondary text-base">
-                                For guests traveling by public transport, several bus routes stop near the temple. Here are a few options:
+                                For guests traveling by public transport, numerous bus routes stop at or near the Avadi Checkpost. Here are some of the key routes:
                             </p>
-                            <div className="text-left space-y-3">
+                            <div className="text-left space-y-3 max-h-60 overflow-y-auto pr-2">
                                 {busRoutes.map((route, index) => (
                                     <div key={index} className="flex items-center gap-4">
-                                        <span className="font-bold text-lg bg-primary/10 text-primary rounded-full w-12 h-12 flex items-center justify-center">{route.number}</span>
+                                        <span className="font-bold text-lg bg-primary/10 text-primary rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">{route.number}</span>
                                         <span className="text-secondary font-medium">{route.route}</span>
                                     </div>
                                 ))}
