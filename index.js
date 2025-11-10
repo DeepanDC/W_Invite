@@ -29,6 +29,7 @@ const FoodIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2
 const BusIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" }), React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" })));
 const WhatsAppIcon = ({ className }) => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: className, viewBox: "0 0 24 24", fill: "currentColor" }, React.createElement("path", { d: "M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.956-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.505 1.905 6.344l.229.352-1.232 4.493 4.625-1.211.335.205z" })));
 const GiftIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M21 11.25v8.25a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 19.5v-8.25M12 4.5v15m0 0l-3.75-3.75M12 19.5l3.75-3.75M21 8.25H3v3h18v-3z" })));
+const SparklesIcon = () => (React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-8 w-8 text-primary", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 1.5 }, React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5 3v4M3 5h4M6 17v4m-2-2h4m10-1V6a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 6v12a2.25 2.25 0 002.25 2.25h8.5A2.25 2.25 0 0019 18v-1m-6-3.75a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" })));
 
 
 const TimeBox = ({ value, label }) => (
@@ -148,6 +149,14 @@ function App() {
         { number: "S48", route: "Avadi Bus Depot to Siranjeevi Nagar" },
         { number: "580S", route: "Avadi to Siruvapuri Temple" },
         { number: "62T", route: "Variant of the 62 route" },
+    ];
+    
+    const specialThanksData = [
+        { service: "Mandapam Booking", name: "xxx name", contact: "yyy Number" },
+        { service: "Decoration Booking", name: "xxx name", contact: "yyy Number" },
+        { service: "Invitation Printing", name: "xxx name", contact: "yyy Number" },
+        { service: "XY Photo & Videography", name: "xxx name", contact: "yyy Number" },
+        { service: "XY Catering Services", name: "xxx name", contact: "yyy Number" },
     ];
 
 
@@ -320,6 +329,35 @@ function App() {
                             ),
                             React.createElement("p", { className: "font-alex-brush text-4xl pt-4 text-primary text-shadow-gold" },
                                 "Deepan & Deepa"
+                            )
+                        )
+                    ),
+                    React.createElement("div", { className: "pt-8 animate-fade-in", style: { animationDelay: '2600ms' } },
+                        React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-4" },
+                            React.createElement("div", { className: "flex items-center justify-center gap-4" },
+                                React.createElement(SparklesIcon, null),
+                                React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary text-center" }, "Special Thanks")
+                            ),
+                            React.createElement("p", { className: "text-secondary text-base text-center" }, "We are incredibly grateful to the amazing vendors who helped bring our special day to life."),
+                            React.createElement("div", { className: "overflow-x-auto pt-4" },
+                                React.createElement("table", { className: "w-full text-left text-secondary" },
+                                    React.createElement("thead", { className: "text-sm text-primary uppercase" },
+                                        React.createElement("tr", null,
+                                            React.createElement("th", { scope: "col", className: "px-4 py-3" }, "Service"),
+                                            React.createElement("th", { scope: "col", className: "px-4 py-3" }, "Name"),
+                                            React.createElement("th", { scope: "col", className: "px-4 py-3" }, "Contact")
+                                        )
+                                    ),
+                                    React.createElement("tbody", null,
+                                        specialThanksData.map((vendor, index) => (
+                                            React.createElement("tr", { key: index, className: "border-b border-primary/20 last:border-b-0" },
+                                                React.createElement("td", { className: "px-4 py-3 font-semibold" }, vendor.service),
+                                                React.createElement("td", { className: "px-4 py-3" }, vendor.name),
+                                                React.createElement("td", { className: "px-4 py-3" }, vendor.contact)
+                                            )
+                                        ))
+                                    )
+                                )
                             )
                         )
                     ),
