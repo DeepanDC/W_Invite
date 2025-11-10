@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 
 // --- RSVP Backend ---
@@ -30,6 +29,9 @@ const RingsIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" class
 const CameraIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.776 48.776 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" /><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" /></svg>);
 const FoodIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" /></svg>);
 const BusIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" /></svg>);
+const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.956-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.505 1.905 6.344l.229.352-1.232 4.493 4.625-1.211.335.205z"/></svg>);
+const GiftIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 19.5v-8.25M12 4.5v15m0 0l-3.75-3.75M12 19.5l3.75-3.75M21 8.25H3v3h18v-3z" /></svg>);
+
 
 const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) => (
     <div className="flex flex-col items-center justify-center w-16 sm:w-20">
@@ -52,6 +54,10 @@ function App() {
     const [fetchError, setFetchError] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<'attending' | 'regrets'>('attending');
     
+    // Photo Request State
+    const [photoRequestName, setPhotoRequestName] = useState('');
+    const [photoRequestIdentification, setPhotoRequestIdentification] = useState('');
+
     // Theme State
     const [theme, setTheme] = useState<'light' | 'dark'>(() => (localStorage.getItem('wedding-theme') as 'light' | 'dark') || 'dark');
 
@@ -102,6 +108,18 @@ function App() {
             setRsvpList(updatedRsvps);
             setIsSubmitted(true);
         } catch (error) { alert("Sorry, we couldn't save your response. Please try again."); }
+    };
+
+    const handlePhotoRequest = () => {
+        if (!photoRequestName.trim()) {
+            alert('Please enter your name to request photos.');
+            return;
+        }
+        const phoneNumber = '918668177427';
+        const message = `Hello, I'm ${photoRequestName}. Identification: ${photoRequestIdentification}. I'd like to request my photos from the wedding.`;
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     };
     
     const attending = rsvpList.filter(r => r.status === 'yes');
@@ -238,9 +256,14 @@ function App() {
                      <div className="pt-8 animate-fade-in delay-1800">
                         <div className="glass-card p-6 sm:p-8 space-y-6">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Share Your Memories</h2>
-                            <p className="text-secondary text-lg">
-                                Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder.
-                            </p>
+                            <div>
+                                <p className="text-secondary text-lg">
+                                    Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder.
+                                </p>
+                                <p className="text-secondary/80 text-sm italic mt-2">
+                                    Note: Please create a folder in your name while you upload.
+                                </p>
+                            </div>
                             <div className="pt-4">
                                 <a 
                                     href={sharedAlbumUrl}
@@ -255,8 +278,59 @@ function App() {
                         </div>
                     </div>
 
-                    {/* --- WITH LOVE --- */}
+                    {/* --- REQUEST YOUR PHOTOS CARD --- */}
                     <div className="pt-8 animate-fade-in" style={{ animationDelay: '2000ms' }}>
+                        <div className="glass-card p-6 sm:p-8 space-y-6">
+                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Request Your Photos</h2>
+                            <p className="text-secondary text-base">
+                                Want a soft copy of your photos from the event? Fill out the details below to request them on WhatsApp.
+                            </p>
+                            <div className="space-y-4">
+                                <input 
+                                    type="text" 
+                                    value={photoRequestName}
+                                    onChange={(e) => setPhotoRequestName(e.target.value)}
+                                    placeholder="Your Full Name" 
+                                    required 
+                                    className="form-input"
+                                />
+                                <input 
+                                    type="text" 
+                                    value={photoRequestIdentification}
+                                    onChange={(e) => setPhotoRequestIdentification(e.target.value)}
+                                    placeholder="Identification (e.g., School, College, Work)" 
+                                    className="form-input"
+                                />
+                            </div>
+                            <div className="pt-2">
+                                <button
+                                    onClick={handlePhotoRequest}
+                                    disabled={!photoRequestName.trim()}
+                                    className="inline-flex items-center justify-center btn-primary w-full"
+                                >
+                                    <WhatsAppIcon className="w-5 h-5 mr-2" />
+                                    Request via WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* --- GIFT REGISTRY --- */}
+                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2200ms' }}>
+                        <div className="glass-card p-6 sm:p-8 space-y-4 text-center">
+                            <div className="flex items-center justify-center gap-4">
+                                <GiftIcon />
+                                <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Gift Registry</h2>
+                            </div>
+                            <OrnateDivider />
+                            <p className="text-secondary text-lg">
+                                Your presence at our wedding is the greatest gift of all. However, should you wish to honour us with a gift, a contribution towards our future home would be warmly appreciated.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* --- WITH LOVE --- */}
+                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2400ms' }}>
                         <div className="glass-card p-6 sm:p-8 space-y-4 text-center">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">With Love</h2>
                             <OrnateDivider />
