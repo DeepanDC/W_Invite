@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 
 // --- RSVP Backend ---
@@ -64,7 +65,7 @@ function App() {
 
     // Countdown Timer
     const calculateTimeLeft = useCallback((): TimeLeft | null => {
-        const weddingDate = new Date('2025-11-30T06:30:00').getTime();
+        const weddingDate = new Date('2025-11-30T06:00:00').getTime();
         const difference = weddingDate - new Date().getTime();
         if (difference > 0) return { days: Math.floor(difference / 86400000), hours: Math.floor(difference / 3600000) % 24, minutes: Math.floor(difference / 60000) % 60, seconds: Math.floor(difference / 1000) % 60 };
         return null;
@@ -107,8 +108,8 @@ function App() {
     const regrets = rsvpList.filter(r => r.status === 'no');
     
     const scheduleItems = [
-        { icon: <RingsIcon />, time: "6:30 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
-        { icon: <CameraIcon />, time: "8:30 AM - 12:00 PM", title: "Photo Session", description: "Join us for photos to capture the memories of our special day." },
+        { icon: <RingsIcon />, time: "6:00 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
+        { icon: <CameraIcon />, time: "9:00 AM - 1:00 PM", title: "Reception & Photo Session", description: "Join us for the reception and a photo session to capture our memories together." },
         { icon: <FoodIcon />, time: "Starts from 7:30 AM", title: "Wedding Breakfast | Brunch", description: "Enjoy a delicious traditional breakfast with us." }
     ];
 
@@ -150,7 +151,7 @@ function App() {
                     <div className="glass-card p-6 sm:p-8">
                         <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-shadow-gold text-primary animate-fade-in delay-200">You're Invited to the Wedding of</h2>
                         <OrnateDivider className="animate-fade-in delay-400" />
-                        <h1 className="font-alex-brush text-5xl sm:text-6xl my-2 animate-fade-in-scale delay-600 text-shadow-gold text-primary">Deepan Chakravarthy<br/><span className="font-cinzel-decorative text-2xl sm:text-3xl">&</span><br/>Deepa</h1>
+                        <h1 className="font-alex-brush text-5xl sm:text-6xl my-2 animate-fade-in-scale delay-600 text-shadow-gold text-primary">Deepan Chakravarthy M<br/><span className="font-cinzel-decorative text-2xl sm:text-3xl">&</span><br/>Deepa S</h1>
                         <p className="text-base sm:text-lg leading-relaxed pt-4 animate-fade-in delay-800 text-secondary">Join us as we begin our new life together.</p>
                         <div className="animate-fade-in delay-1000">
                             <OrnateDivider />
@@ -251,6 +252,20 @@ function App() {
                                     Upload to Shared Drive
                                 </a>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* --- WITH LOVE --- */}
+                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2000ms' }}>
+                        <div className="glass-card p-6 sm:p-8 space-y-4 text-center">
+                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">With Love</h2>
+                            <OrnateDivider />
+                            <p className="text-secondary text-lg italic">
+                                Your presence at our wedding is the greatest gift of all. We can't wait to celebrate this special day with you!
+                            </p>
+                            <p className="font-alex-brush text-4xl pt-4 text-primary text-shadow-gold">
+                                Deepan & Deepa
+                            </p>
                         </div>
                     </div>
 

@@ -40,6 +40,7 @@ function App() {
     const googleMapsUrl = 'https://maps.app.goo.gl/upR92xf4KrvbUWUn8';
     const sharedAlbumUrl = 'https://drive.google.com/drive/folders/1a1LvcI5VScaN73-m7ii_X7u7Nmr2kS5U';
     
+    // RSVP State
     const [name, setName] = useState('');
     const [rsvpStatus, setRsvpStatus] = useState(null);
     const [message, setMessage] = useState('');
@@ -49,8 +50,10 @@ function App() {
     const [fetchError, setFetchError] = useState(null);
     const [activeTab, setActiveTab] = useState('attending');
     
-    const [theme, setTheme] = useState(() => (localStorage.getItem('wedding-theme') || 'dark'));
+    // Theme State
+    const [theme, setTheme] = useState(() => (localStorage.getItem('wedding-theme')) || 'dark');
 
+    // Theme Effect
     useEffect(() => {
         localStorage.setItem('wedding-theme', theme);
         document.documentElement.classList.toggle('dark', theme === 'dark');
@@ -58,8 +61,9 @@ function App() {
 
     const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
 
+    // Countdown Timer
     const calculateTimeLeft = useCallback(() => {
-        const weddingDate = new Date('2025-11-30T06:30:00').getTime();
+        const weddingDate = new Date('2025-11-30T06:00:00').getTime();
         const difference = weddingDate - new Date().getTime();
         if (difference > 0) return { days: Math.floor(difference / 86400000), hours: Math.floor(difference / 3600000) % 24, minutes: Math.floor(difference / 60000) % 60, seconds: Math.floor(difference / 1000) % 60 };
         return null;
@@ -70,6 +74,7 @@ function App() {
         return () => clearTimeout(timer);
     });
     
+    // Data Fetching
     const fetchRsvps = useCallback(async () => {
         setIsLoadingRsvps(true);
         try {
@@ -83,6 +88,7 @@ function App() {
 
     useEffect(() => { fetchRsvps(); }, [fetchRsvps]);
 
+    // Handlers
     const handleRsvpSubmit = async (e) => {
         e.preventDefault();
         if (!name.trim() || !rsvpStatus) return alert('Please enter your name and select your RSVP choice.');
@@ -100,8 +106,8 @@ function App() {
     const regrets = rsvpList.filter(r => r.status === 'no');
     
     const scheduleItems = [
-        { icon: React.createElement(RingsIcon), time: "6:30 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
-        { icon: React.createElement(CameraIcon), time: "8:30 AM - 12:00 PM", title: "Photo Session", description: "Join us for photos to capture the memories of our special day." },
+        { icon: React.createElement(RingsIcon), time: "6:00 AM - 7:30 AM", title: "Muhurtham Ceremony", description: "The sacred wedding ceremony where we tie the knot." },
+        { icon: React.createElement(CameraIcon), time: "9:00 AM - 1:00 PM", title: "Reception & Photo Session", description: "Join us for the reception and a photo session to capture our memories together." },
         { icon: React.createElement(FoodIcon), time: "Starts from 7:30 AM", title: "Wedding Breakfast | Brunch", description: "Enjoy a delicious traditional breakfast with us." }
     ];
 
@@ -126,23 +132,21 @@ function App() {
         { number: "62T", route: "Variant of the 62 route" },
     ];
 
+
     return (
         React.createElement("div", { className: "min-h-screen w-full bg-no-repeat bg-cover bg-center bg-fixed relative", style: { backgroundImage: `url('Picsart_25-10-06_05-26-07-931.png')` } },
             React.createElement("div", { className: `absolute inset-0 bg-gradient-to-b from-transparent ${theme === 'light' ? 'via-white/20 to-white/50' : 'via-black/10 to-black/40'}` }),
             React.createElement(AnimatedFloralBackground, { direction: "up" }),
             React.createElement(AnimatedFloralBackground, { direction: "down" }),
-
             React.createElement("button", { onClick: toggleTheme, className: "theme-toggle-btn text-primary", "aria-label": `Switch to ${theme === 'light' ? 'dark' : 'light'} theme` },
                 theme === 'light' ? React.createElement(MoonIcon, null) : React.createElement(SunIcon, null)
             ),
-            
             React.createElement("main", { className: "min-h-screen w-full flex flex-col items-center justify-start p-4 sm:p-8 overflow-y-auto relative z-10" },
                 React.createElement("div", { className: "w-full max-w-lg text-center space-y-4 pt-20 sm:pt-24 pb-16" },
-                    // --- INVITATION CARD ---
                     React.createElement("div", { className: "glass-card p-6 sm:p-8" },
                         React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-shadow-gold text-primary animate-fade-in delay-200" }, "You're Invited to the Wedding of"),
                         React.createElement(OrnateDivider, { className: "animate-fade-in delay-400" }),
-                        React.createElement("h1", { className: "font-alex-brush text-5xl sm:text-6xl my-2 animate-fade-in-scale delay-600 text-shadow-gold text-primary" }, "Deepan Chakravarthy", React.createElement("br", null), React.createElement("span", { className: "font-cinzel-decorative text-2xl sm:text-3xl" }, "&"), React.createElement("br", null), "Deepa"),
+                        React.createElement("h1", { className: "font-alex-brush text-5xl sm:text-6xl my-2 animate-fade-in-scale delay-600 text-shadow-gold text-primary" }, "Deepan Chakravarthy M", React.createElement("br", null), React.createElement("span", { className: "font-cinzel-decorative text-2xl sm:text-3xl" }, "&"), React.createElement("br", null), "Deepa S"),
                         React.createElement("p", { className: "text-base sm:text-lg leading-relaxed pt-4 animate-fade-in delay-800 text-secondary" }, "Join us as we begin our new life together."),
                         React.createElement("div", { className: "animate-fade-in delay-1000" },
                             React.createElement(OrnateDivider, null),
@@ -150,8 +154,8 @@ function App() {
                                 React.createElement("p", null, "Sunday, 30th November 2025")
                             ),
                             React.createElement("div", { className: "py-8" },
-                                timeLeft ? (React.createElement("div", { className: "flex justify-center gap-2 sm:gap-4" }, React.createElement(TimeBox, { value: timeLeft.days, label: "Days" }), React.createElement(TimeBox, { value: timeLeft.hours, label: "Hours" }), React.createElement(TimeBox, { value: timeLeft.minutes, label: "Minutes" }), React.createElement(TimeBox, { value: timeLeft.seconds, label: "Seconds" }))) 
-                                : (React.createElement("p", { className: "text-xl font-semibold text-primary" }, "The big day is here!"))
+                                timeLeft ? (React.createElement("div", { className: "flex justify-center gap-2 sm:gap-4" }, React.createElement(TimeBox, { value: timeLeft.days, label: "Days" }), React.createElement(TimeBox, { value: timeLeft.hours, label: "Hours" }), React.createElement(TimeBox, { value: timeLeft.minutes, label: "Minutes" }), React.createElement(TimeBox, { value: timeLeft.seconds, label: "Seconds" })))
+                                    : (React.createElement("p", { className: "text-xl font-semibold text-primary" }, "The big day is here!"))
                             ),
                             React.createElement("div", { className: "space-y-1 text-secondary" },
                                 React.createElement("p", { className: "text-lg sm:text-xl font-bold tracking-wide" }, "V.K.K. Menon Convention Centre"),
@@ -160,8 +164,6 @@ function App() {
                             React.createElement("div", { className: "pt-8" }, React.createElement("a", { href: googleMapsUrl, target: "_blank", rel: "noopener noreferrer", className: "inline-flex items-center justify-center btn-primary" }, React.createElement(MapPinIcon, null), " View Location"))
                         )
                     ),
-                    
-                    // --- SCHEDULE OF EVENTS ---
                     React.createElement("div", { className: "pt-8 animate-fade-in delay-1200" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Schedule of Events"),
@@ -182,8 +184,6 @@ function App() {
                             )
                         )
                     ),
-
-                    // --- GETTING THERE BY BUS ---
                     React.createElement("div", { className: "pt-8 animate-fade-in delay-1400" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
                             React.createElement("div", { className: "flex items-center justify-center gap-4" },
@@ -206,8 +206,6 @@ function App() {
                             )
                         )
                     ),
-
-                    // --- RSVP & GUESTBOOK CARD ---
                     React.createElement("div", { className: "pt-8 animate-fade-in delay-1600" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-8" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Our Guestbook & RSVP"),
@@ -221,33 +219,41 @@ function App() {
                                     React.createElement("div", null, React.createElement("button", { type: "submit", className: "btn-primary w-full" }, "Send RSVP"))
                                 )
                             ),
-                            React.createElement("div", { className: "pt-4" }, isLoadingRsvps ? React.createElement("p", { className: "text-secondary" }, "Loading responses...") : fetchError ? React.createElement("p", { className: "text-red-500" }, fetchError) : (React.createElement("div", null, React.createElement("div", { className: "guest-list-tabs" }, React.createElement("div", { onClick: () => setActiveTab('attending'), className: `guest-list-tab ${activeTab === 'attending' ? 'active' : ''}` }, `Attending (${attending.length})`), React.createElement("div", { onClick: () => setActiveTab('regrets'), className: `guest-list-tab ${activeTab === 'regrets' ? 'active' : ''}` }, `Sending Wishes (${regrets.length})`)), React.createElement("div", { className: "pt-4 text-center" }, activeTab === 'attending' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, attending.length > 0 ? attending.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "Be the first to RSVP!"))), activeTab === 'regrets' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, regrets.length > 0 ? regrets.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "No regrets yet!")))))))
-                         )
-                     ),
-
-                    // --- SHARE YOUR MEMORIES CARD ---
-                     React.createElement("div", { className: "pt-8 animate-fade-in delay-1800" },
+                            React.createElement("div", { className: "pt-4" }, isLoadingRsvps ? React.createElement("p", { className: "text-secondary" }, "Loading responses...") : fetchError ? React.createElement("p", { className: "text-red-500" }, fetchError) : (React.createElement("div", null, React.createElement("div", { className: "guest-list-tabs" }, React.createElement("div", { onClick: () => setActiveTab('attending'), className: `guest-list-tab ${activeTab === 'attending' ? 'active' : ''}` }, "Attending (", attending.length, ")"), React.createElement("div", { onClick: () => setActiveTab('regrets'), className: `guest-list-tab ${activeTab === 'regrets' ? 'active' : ''}` }, "Sending Wishes (", regrets.length, ")")), React.createElement("div", { className: "pt-4 text-center" }, activeTab === 'attending' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, attending.length > 0 ? attending.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "Be the first to RSVP!"))), activeTab === 'regrets' && (React.createElement("div", { className: "flex flex-wrap justify-center" }, regrets.length > 0 ? regrets.map((r, i) => React.createElement("span", { key: i, className: "guest-chip" }, r.name)) : React.createElement("p", { className: "text-secondary" }, "No regrets yet!")))))))
+                        )
+                    ),
+                    React.createElement("div", { className: "pt-8 animate-fade-in delay-1800" },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-6" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Share Your Memories"),
                             React.createElement("p", { className: "text-secondary text-lg" },
                                 "Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder."
                             ),
                             React.createElement("div", { className: "pt-4" },
-                                React.createElement("a", 
-                                    {
-                                        href: sharedAlbumUrl,
-                                        target: "_blank", 
-                                        rel: "noopener noreferrer", 
-                                        className: "inline-flex items-center justify-center btn-primary"
-                                    },
+                                React.createElement("a", {
+                                    href: sharedAlbumUrl,
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    className: "inline-flex items-center justify-center btn-primary"
+                                },
                                     React.createElement(UploadIcon, { className: "w-5 h-5 mr-2" }),
                                     "Upload to Shared Drive"
                                 )
                             )
                         )
                     ),
-
-                     React.createElement("div", { className: "h-40" })
+                    React.createElement("div", { className: "pt-8 animate-fade-in", style: { animationDelay: '2000ms' } },
+                        React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-4 text-center" },
+                            React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "With Love"),
+                            React.createElement(OrnateDivider, null),
+                            React.createElement("p", { className: "text-secondary text-lg italic" },
+                                "Your presence at our wedding is the greatest gift of all. We can't wait to celebrate this special day with you!"
+                            ),
+                            React.createElement("p", { className: "font-alex-brush text-4xl pt-4 text-primary text-shadow-gold" },
+                                "Deepan & Deepa"
+                            )
+                        )
+                    ),
+                    React.createElement("div", { className: "h-40" })
                 )
             )
         )
@@ -261,5 +267,5 @@ if (!rootElement) {
 
 const root = ReactDOM.createRoot(rootElement);
 root.render(
-  React.createElement(React.StrictMode, null, React.createElement(App, null))
+  React.createElement(React.StrictMode, null, React.createElement(App))
 );
