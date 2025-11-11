@@ -310,18 +310,6 @@ function App() {
                     ),
                     React.createElement("div", { className: "pt-8 animate-fade-in", style: { animationDelay: '2200ms' } },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-4 text-center" },
-                            React.createElement("div", { className: "flex items-center justify-center gap-4" },
-                                React.createElement(GiftIcon, null),
-                                React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "Gift Registry")
-                            ),
-                            React.createElement(OrnateDivider, null),
-                            React.createElement("p", { className: "text-secondary text-lg" },
-                                "Your presence at our wedding is the greatest gift of all. However, should you wish to honour us with a gift, a contribution towards our future home would be warmly appreciated."
-                            )
-                        )
-                    ),
-                    React.createElement("div", { className: "pt-8 animate-fade-in", style: { animationDelay: '2400ms' } },
-                        React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-4 text-center" },
                             React.createElement("h2", { className: "font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary" }, "With Love"),
                             React.createElement(OrnateDivider, null),
                             React.createElement("p", { className: "text-secondary text-lg italic" },
@@ -332,7 +320,7 @@ function App() {
                             )
                         )
                     ),
-                    React.createElement("div", { className: "pt-8 animate-fade-in", style: { animationDelay: '2600ms' } },
+                    React.createElement("div", { className: "pt-8 animate-fade-in", style: { animationDelay: '2400ms' } },
                         React.createElement("div", { className: "glass-card p-6 sm:p-8 space-y-4" },
                             React.createElement("div", { className: "flex items-center justify-center gap-4" },
                                 React.createElement(SparklesIcon, null),

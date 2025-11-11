@@ -30,7 +30,6 @@ const CameraIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" clas
 const FoodIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21.75 12.75V5.25a2.25 2.25 0 00-2.25-2.25h-15a2.25 2.25 0 00-2.25 2.25v7.5m19.5 0A2.25 2.25 0 0119.5 15h-15a2.25 2.25 0 01-2.25-2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.625a2.25 2.25 0 01-2.36 0l-7.5-4.625A2.25 2.25 0 012.25 12.993V12.75m19.5 0h-19.5" /></svg>);
 const BusIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" /></svg>);
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.956-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.505 1.905 6.344l.229.352-1.232 4.493 4.625-1.211.335.205z"/></svg>);
-const GiftIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 19.5v-8.25M12 4.5v15m0 0l-3.75-3.75M12 19.5l3.75-3.75M21 8.25H3v3h18v-3z" /></svg>);
 const SparklesIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m10-1V6a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 6v12a2.25 2.25 0 002.25 2.25h8.5A2.25 2.25 0 0019 18v-1m-6-3.75a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" /></svg>);
 
 
@@ -324,22 +323,8 @@ function App() {
                         </div>
                     </div>
 
-                    {/* --- GIFT REGISTRY --- */}
-                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2200ms' }}>
-                        <div className="glass-card p-6 sm:p-8 space-y-4 text-center">
-                            <div className="flex items-center justify-center gap-4">
-                                <GiftIcon />
-                                <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Gift Registry</h2>
-                            </div>
-                            <OrnateDivider />
-                            <p className="text-secondary text-lg">
-                                Your presence at our wedding is the greatest gift of all. However, should you wish to honour us with a gift, a contribution towards our future home would be warmly appreciated.
-                            </p>
-                        </div>
-                    </div>
-
                     {/* --- WITH LOVE --- */}
-                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2400ms' }}>
+                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2200ms' }}>
                         <div className="glass-card p-6 sm:p-8 space-y-4 text-center">
                             <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">With Love</h2>
                             <OrnateDivider />
@@ -353,7 +338,7 @@ function App() {
                     </div>
 
                     {/* --- SPECIAL THANKS --- */}
-                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2600ms' }}>
+                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2400ms' }}>
                         <div className="glass-card p-6 sm:p-8 space-y-4">
                             <div className="flex items-center justify-center gap-4">
                                 <SparklesIcon />
