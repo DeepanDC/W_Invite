@@ -31,6 +31,8 @@ const FoodIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" classN
 const BusIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036l2.828-2.828m-2.828 2.828l-2.828 2.828m-2.828-2.828l-2.828-2.828m2.828 2.828l-3.536 3.536m-1.414-1.414L6.343 8.343m6.364-6.364l-1.414 1.414" /></svg>);
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.956-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.269.655 4.505 1.905 6.344l.229.352-1.232 4.493 4.625-1.211.335.205z"/></svg>);
 const SparklesIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m10-1V6a2.25 2.25 0 00-2.25-2.25H8.25A2.25 2.25 0 006 6v12a2.25 2.25 0 002.25 2.25h8.5A2.25 2.25 0 0019 18v-1m-6-3.75a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" /></svg>);
+const ChevronDownIcon: React.FC<{ className?: string }> = ({ className = "h-7 w-7 text-primary" }) => (<svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>);
+const PhoneIcon: React.FC = () => (<svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 6.75z" /></svg>);
 
 
 const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) => (
@@ -40,9 +42,57 @@ const TimeBox: React.FC<{ value: number; label: string }> = ({ value, label }) =
     </div>
 );
 
+// --- Collapsible Card Component ---
+interface CollapsibleCardProps {
+    title: string;
+    icon?: React.ReactNode;
+    isOpen: boolean;
+    onToggle: () => void;
+    children: React.ReactNode;
+    delay: number;
+}
+
+const CollapsibleCard: React.FC<CollapsibleCardProps> = ({ title, icon, isOpen, onToggle, children, delay }) => {
+    return (
+        <div className="pt-8 animate-fade-in" style={{ animationDelay: `${delay}ms`}}>
+            <div className="glass-card overflow-hidden transition-shadow duration-300 hover:shadow-lg">
+                <button
+                    onClick={onToggle}
+                    className="w-full flex items-center justify-between p-6 sm:p-8 text-left group"
+                    aria-expanded={isOpen}
+                    aria-controls={`content-${title.replace(/\s+/g, '-')}`}
+                >
+                    <div className="flex items-center gap-4">
+                        {icon}
+                        <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">{title}</h2>
+                    </div>
+                    <ChevronDownIcon className={`h-7 w-7 text-primary transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''} group-hover:scale-110`} />
+                </button>
+                <div id={`content-${title.replace(/\s+/g, '-')}`} className={`collapsible-content ${isOpen ? 'open' : ''}`}>
+                    <div className="p-6 sm:p-8 pt-0">
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
 function App() {
     const googleMapsUrl = 'https://maps.app.goo.gl/upR92xf4KrvbUWUn8';
     const sharedAlbumUrl = 'https://drive.google.com/drive/folders/1a1LvcI5VScaN73-m7ii_X7u7Nmr2kS5U';
+    
+    // Collapsible sections state
+    const [openSections, setOpenSections] = useState({
+        schedule: false,
+        gettingThere: false,
+        rsvp: false,
+        memories: false,
+        photos: false,
+        emergency: false,
+        thanks: false,
+    });
     
     // RSVP State
     const [name, setName] = useState('');
@@ -122,6 +172,21 @@ function App() {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     };
     
+    const toggleSection = (sectionId: keyof typeof openSections) => {
+        setOpenSections(prev => ({ ...prev, [sectionId]: !prev[sectionId] }));
+    };
+
+    const allOpen = Object.values(openSections).every(Boolean);
+
+    const toggleAll = () => {
+        const newState = !allOpen;
+        const newSectionsState = Object.keys(openSections).reduce((acc, key) => {
+            acc[key as keyof typeof openSections] = newState;
+            return acc;
+        }, {} as typeof openSections);
+        setOpenSections(newSectionsState);
+    };
+
     const attending = rsvpList.filter(r => r.status === 'yes');
     const regrets = rsvpList.filter(r => r.status === 'no');
     
@@ -132,32 +197,11 @@ function App() {
     ];
 
     const busRoutes = [
-        { number: "150", route: "Broadway to Avadi" },
-        { number: "565", route: "Sriperumbudur to Avadi Checkpost" },
-        { number: "62", route: "Poonamallee to Red Hills" },
-        { number: "41D", route: "Mandaveli to Avadi" },
-        { number: "73", route: "M.G.R. Koyambedu (C.M.B.T.) to Avadi" },
-        { number: "202", route: "Avadi to Tambaram" },
-        { number: "505", route: "Redhills to Thiruvallur" },
-        { number: "572", route: "Avadi Bus Depot to Thiruvallur Bus Station" },
-        { number: "65B", route: "Avadi to Poonamallee" },
-        { number: "65G", route: "Avadi to Meyyur" },
-        { number: "65H", route: "Avadi to Red Hills" },
-        { number: "71V", route: "Broadway to Veppampattu Eswaran Nagar" },
-        { number: "77V", route: "M.G.R. Koyambedu to Veppampattu" },
-        { number: "580M", route: "Avadi Bus Depot to Thirunindravoor" },
-        { number: "S47", route: "Avadi Bus Depot to Mittanamallee" },
-        { number: "S48", route: "Avadi Bus Depot to Siranjeevi Nagar" },
-        { number: "580S", route: "Avadi to Siruvapuri Temple" },
-        { number: "62T", route: "Variant of the 62 route" },
+        { number: "150", route: "Broadway to Avadi" }, { number: "565", route: "Sriperumbudur to Avadi Checkpost" }, { number: "62", route: "Poonamallee to Red Hills" }, { number: "41D", route: "Mandaveli to Avadi" }, { number: "73", route: "M.G.R. Koyambedu (C.M.B.T.) to Avadi" }, { number: "202", route: "Avadi to Tambaram" }, { number: "505", route: "Redhills to Thiruvallur" }, { number: "572", route: "Avadi Bus Depot to Thiruvallur Bus Station" }, { number: "65B", route: "Avadi to Poonamallee" }, { number: "65G", route: "Avadi to Meyyur" }, { number: "65H", route: "Avadi to Red Hills" }, { number: "71V", route: "Broadway to Veppampattu Eswaran Nagar" }, { number: "77V", route: "M.G.R. Koyambedu to Veppampattu" }, { number: "580M", route: "Avadi Bus Depot to Thirunindravoor" }, { number: "S47", route: "Avadi Bus Depot to Mittanamallee" }, { number: "S48", route: "Avadi Bus Depot to Siranjeevi Nagar" }, { number: "580S", route: "Avadi to Siruvapuri Temple" }, { number: "62T", route: "Variant of the 62 route" },
     ];
 
     const specialThanksData = [
-        { service: "Mandapam Booking", name: "xxx name", contact: "yyy Number" },
-        { service: "Decoration Booking", name: "xxx name", contact: "yyy Number" },
-        { service: "Invitation Printing", name: "xxx name", contact: "yyy Number" },
-        { service: "XY Photo & Videography", name: "xxx name", contact: "yyy Number" },
-        { service: "XY Catering Services", name: "xxx name", contact: "yyy Number" },
+        { service: "Mandapam Booking", name: "xxx name", contact: "yyy Number" }, { service: "Decoration Booking", name: "xxx name", contact: "yyy Number" }, { service: "Invitation Printing", name: "xxx name", contact: "yyy Number" }, { service: "XY Photo & Videography", name: "xxx name", contact: "yyy Number" }, { service: "XY Catering Services", name: "xxx name", contact: "yyy Number" },
     ];
 
 
@@ -196,132 +240,98 @@ function App() {
                         </div>
                     </div>
                     
-                    {/* --- SCHEDULE OF EVENTS --- */}
-                    <div className="pt-8 animate-fade-in delay-1200">
-                        <div className="glass-card p-6 sm:p-8 space-y-6">
-                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Schedule of Events</h2>
-                            <div className="space-y-6 text-left">
-                                {scheduleItems.map((item, index) => (
-                                    <div key={index} className="flex items-start gap-4">
-                                        <div className="flex flex-col items-center">
-                                            {item.icon}
-                                            {index < scheduleItems.length - 1 && <div className="w-px h-12 bg-primary/30 mt-2"></div>}
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-lg text-secondary">{item.time}</p>
-                                            <h3 className="font-semibold text-xl text-primary">{item.title}</h3>
-                                            <p className="text-secondary/90">{item.description}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    <div className="text-right py-2 animate-fade-in delay-1000">
+                        <button onClick={toggleAll} className="font-semibold text-primary hover:text-accent transition-colors duration-300 text-sm sm:text-base px-4 py-2 rounded-full hover:bg-primary/10">
+                            {allOpen ? 'Collapse All Sections' : 'Expand All Sections'}
+                        </button>
                     </div>
+
+                    {/* --- SCHEDULE OF EVENTS --- */}
+                    <CollapsibleCard title="Schedule of Events" icon={<RingsIcon />} isOpen={openSections.schedule} onToggle={() => toggleSection('schedule')} delay={1200}>
+                        <div className="space-y-6 text-left">
+                            {scheduleItems.map((item, index) => (
+                                <div key={index} className="flex items-start gap-4">
+                                    <div className="flex flex-col items-center">
+                                        {item.icon}
+                                        {index < scheduleItems.length - 1 && <div className="w-px h-12 bg-primary/30 mt-2"></div>}
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-lg text-secondary">{item.time}</p>
+                                        <h3 className="font-semibold text-xl text-primary">{item.title}</h3>
+                                        <p className="text-secondary/90">{item.description}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </CollapsibleCard>
 
                     {/* --- GETTING THERE BY BUS --- */}
-                    <div className="pt-8 animate-fade-in delay-1400">
-                        <div className="glass-card p-6 sm:p-8 space-y-6">
-                            <div className="flex items-center justify-center gap-4">
-                                <BusIcon />
-                                <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Getting There</h2>
-                            </div>
-                            <p className="text-secondary text-base">
-                                For guests traveling by public transport, numerous bus routes stop at or near the Avadi Checkpost. Here are some of the key routes:
-                            </p>
-                            <div className="text-left space-y-3 max-h-60 overflow-y-auto pr-2">
-                                {busRoutes.map((route, index) => (
-                                    <div key={index} className="flex items-center gap-4">
-                                        <span className="font-bold text-lg bg-primary/10 text-primary rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">{route.number}</span>
-                                        <span className="text-secondary font-medium">{route.route}</span>
-                                    </div>
-                                ))}
-                            </div>
-                             <p className="text-secondary/80 text-sm pt-2">
-                                Please check the latest bus schedules and routes from your location. We recommend using a map app for the final stop details.
-                            </p>
+                    <CollapsibleCard title="Getting There" icon={<BusIcon />} isOpen={openSections.gettingThere} onToggle={() => toggleSection('gettingThere')} delay={1400}>
+                        <p className="text-secondary text-base text-left">
+                            For guests traveling by public transport, numerous bus routes stop at or near the Avadi Checkpost. Here are some of the key routes:
+                        </p>
+                        <div className="text-left space-y-3 max-h-60 overflow-y-auto pr-2 pt-4">
+                            {busRoutes.map((route, index) => (
+                                <div key={index} className="flex items-center gap-4">
+                                    <span className="font-bold text-lg bg-primary/10 text-primary rounded-full w-12 h-12 flex-shrink-0 flex items-center justify-center">{route.number}</span>
+                                    <span className="text-secondary font-medium">{route.route}</span>
+                                </div>
+                            ))}
                         </div>
-                    </div>
+                         <p className="text-secondary/80 text-sm pt-4 text-left">
+                            Please check the latest bus schedules and routes from your location. We recommend using a map app for the final stop details.
+                        </p>
+                    </CollapsibleCard>
 
                     {/* --- RSVP & GUESTBOOK CARD --- */}
-                    <div className="pt-8 animate-fade-in delay-1600">
-                        <div className="glass-card p-6 sm:p-8 space-y-8">
-                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Our Guestbook & RSVP</h2>
-                            {isSubmitted ? (
-                                <div className="text-center space-y-4 py-8"><CheckCircleIcon className="w-20 h-20 text-emerald-500 mx-auto" /><p className="font-semibold text-2xl text-secondary">Thank you for your response!</p><p className="text-lg text-secondary">We can't wait to celebrate with you.</p></div>
-                            ) : (
-                                <form onSubmit={handleRsvpSubmit} className="space-y-6 max-w-lg mx-auto text-secondary">
-                                    <div className="space-y-2"><label htmlFor="name" className="font-semibold text-lg text-primary">1. Please enter your name</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Full Name" required className="form-input text-center"/></div>
-                                    <div className="space-y-2"><p className="font-semibold text-lg text-primary">2. Will you be joining us?</p><div className="grid grid-cols-1 sm:grid-cols-2 gap-4"><div onClick={() => setRsvpStatus('yes')} aria-pressed={rsvpStatus === 'yes'} className={`rsvp-choice-card ${rsvpStatus === 'yes' ? 'selected' : ''}`}><HeartIcon className="w-8 h-8 mx-auto mb-2 choice-icon" /><span className="font-semibold text-lg">Joyfully Attending</span></div><div onClick={() => setRsvpStatus('no')} aria-pressed={rsvpStatus === 'no'} className={`rsvp-choice-card ${rsvpStatus === 'no' ? 'selected' : ''}`}><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 mx-auto mb-2 choice-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg><span className="font-semibold text-lg">Regretfully Decline</span></div></div></div>
-                                    <div className="space-y-2"><label htmlFor="message" className="font-semibold text-lg text-primary">3. Leave a message (optional)</label><textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Share your blessings..." rows={3} className="form-input" /></div>
-                                    <div><button type="submit" className="btn-primary w-full">Send RSVP</button></div>
-                                </form>
-                            )}
-                            <div className="pt-4">{isLoadingRsvps ? <p className="text-secondary">Loading responses...</p> : fetchError ? <p className="text-red-500">{fetchError}</p> : (<div><div className="guest-list-tabs"><div onClick={() => setActiveTab('attending')} className={`guest-list-tab ${activeTab === 'attending' ? 'active' : ''}`}>Attending ({attending.length})</div><div onClick={() => setActiveTab('regrets')} className={`guest-list-tab ${activeTab === 'regrets' ? 'active' : ''}`}>Sending Wishes ({regrets.length})</div></div><div className="pt-4 text-center">{activeTab === 'attending' && (<div className="flex flex-wrap justify-center">{attending.length > 0 ? attending.map((r, i) => <span key={i} className="guest-chip">{r.name}</span>) : <p className="text-secondary">Be the first to RSVP!</p>}</div>)}{activeTab === 'regrets' && (<div className="flex flex-wrap justify-center">{regrets.length > 0 ? regrets.map((r, i) => <span key={i} className="guest-chip">{r.name}</span>) : <p className="text-secondary">No regrets yet!</p>}</div>)}</div></div>)}</div>
-                         </div>
-                     </div>
+                    <CollapsibleCard title="Our Guestbook & RSVP" icon={<HeartIcon className="h-8 w-8 text-primary"/>} isOpen={openSections.rsvp} onToggle={() => toggleSection('rsvp')} delay={1600}>
+                        <div className="space-y-8">
+                        {isSubmitted ? (
+                            <div className="text-center space-y-4 py-8"><CheckCircleIcon className="w-20 h-20 text-emerald-500 mx-auto" /><p className="font-semibold text-2xl text-secondary">Thank you for your response!</p><p className="text-lg text-secondary">We can't wait to celebrate with you.</p></div>
+                        ) : (
+                            <form onSubmit={handleRsvpSubmit} className="space-y-6 max-w-lg mx-auto text-secondary">
+                                <div className="space-y-2"><label htmlFor="name" className="font-semibold text-lg text-primary">1. Please enter your name</label><input id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Full Name" required className="form-input text-center"/></div>
+                                <div className="space-y-2"><p className="font-semibold text-lg text-primary">2. Will you be joining us?</p><div className="grid grid-cols-1 sm:grid-cols-2 gap-4"><div onClick={() => setRsvpStatus('yes')} aria-pressed={rsvpStatus === 'yes'} className={`rsvp-choice-card ${rsvpStatus === 'yes' ? 'selected' : ''}`}><HeartIcon className="w-8 h-8 mx-auto mb-2 choice-icon" /><span className="font-semibold text-lg">Joyfully Attending</span></div><div onClick={() => setRsvpStatus('no')} aria-pressed={rsvpStatus === 'no'} className={`rsvp-choice-card ${rsvpStatus === 'no' ? 'selected' : ''}`}><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 mx-auto mb-2 choice-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg><span className="font-semibold text-lg">Regretfully Decline</span></div></div></div>
+                                <div className="space-y-2"><label htmlFor="message" className="font-semibold text-lg text-primary">3. Leave a message (optional)</label><textarea id="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Share your blessings..." rows={3} className="form-input" /></div>
+                                <div><button type="submit" className="btn-primary w-full">Send RSVP</button></div>
+                            </form>
+                        )}
+                        <div className="pt-4">{isLoadingRsvps ? <p className="text-secondary">Loading responses...</p> : fetchError ? <p className="text-red-500">{fetchError}</p> : (<div><div className="guest-list-tabs"><div onClick={() => setActiveTab('attending')} className={`guest-list-tab ${activeTab === 'attending' ? 'active' : ''}`}>Attending ({attending.length})</div><div onClick={() => setActiveTab('regrets')} className={`guest-list-tab ${activeTab === 'regrets' ? 'active' : ''}`}>Sending Wishes ({regrets.length})</div></div><div className="pt-4 text-center">{activeTab === 'attending' && (<div className="flex flex-wrap justify-center">{attending.length > 0 ? attending.map((r, i) => <span key={i} className="guest-chip">{r.name}</span>) : <p className="text-secondary">Be the first to RSVP!</p>}</div>)}{activeTab === 'regrets' && (<div className="flex flex-wrap justify-center">{regrets.length > 0 ? regrets.map((r, i) => <span key={i} className="guest-chip">{r.name}</span>) : <p className="text-secondary">No regrets yet!</p>}</div>)}</div></div>)}</div>
+                        </div>
+                    </CollapsibleCard>
 
                     {/* --- SHARE YOUR MEMORIES CARD --- */}
-                     <div className="pt-8 animate-fade-in delay-1800">
-                        <div className="glass-card p-6 sm:p-8 space-y-6">
-                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Share Your Memories</h2>
-                            <div>
-                                <p className="text-secondary text-lg">
-                                    Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder.
-                                </p>
-                                <p className="text-secondary/80 text-sm italic mt-2">
-                                    Note: Please create a folder in your name while you upload.
-                                </p>
-                            </div>
-                            <div className="pt-4">
-                                <a 
-                                    href={sharedAlbumUrl}
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="inline-flex items-center justify-center btn-primary"
-                                >
-                                    <UploadIcon className="w-5 h-5 mr-2" />
-                                    Upload to Shared Drive
-                                </a>
-                            </div>
+                    <CollapsibleCard title="Share Your Memories" icon={<CameraIcon />} isOpen={openSections.memories} onToggle={() => toggleSection('memories')} delay={1800}>
+                        <p className="text-secondary text-lg">
+                            Help us capture the joy! Click below to upload your favorite photos and videos to our shared Google Drive folder.
+                        </p>
+                        <p className="text-secondary/80 text-sm italic mt-2">
+                            Note: Please create a folder in your name while you upload.
+                        </p>
+                        <div className="pt-4">
+                            <a href={sharedAlbumUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center btn-primary">
+                                <UploadIcon className="w-5 h-5 mr-2" />
+                                Upload to Shared Drive
+                            </a>
                         </div>
-                    </div>
+                    </CollapsibleCard>
 
                     {/* --- REQUEST YOUR PHOTOS CARD --- */}
-                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2000ms' }}>
-                        <div className="glass-card p-6 sm:p-8 space-y-6">
-                            <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary">Request Your Photos</h2>
-                            <p className="text-secondary text-base">
-                                Want a soft copy of your photos from the event? Fill out the details below to request them on WhatsApp.
-                            </p>
-                            <div className="space-y-4">
-                                <input 
-                                    type="text" 
-                                    value={photoRequestName}
-                                    onChange={(e) => setPhotoRequestName(e.target.value)}
-                                    placeholder="Your Full Name" 
-                                    required 
-                                    className="form-input"
-                                />
-                                <input 
-                                    type="text" 
-                                    value={photoRequestIdentification}
-                                    onChange={(e) => setPhotoRequestIdentification(e.target.value)}
-                                    placeholder="Identification (e.g., School, College, Work)" 
-                                    className="form-input"
-                                />
-                            </div>
-                            <div className="pt-2">
-                                <button
-                                    onClick={handlePhotoRequest}
-                                    disabled={!photoRequestName.trim()}
-                                    className="inline-flex items-center justify-center btn-primary w-full"
-                                >
-                                    <WhatsAppIcon className="w-5 h-5 mr-2" />
-                                    Request via WhatsApp
-                                </button>
-                            </div>
+                    <CollapsibleCard title="Request Your Photos" icon={<WhatsAppIcon className="h-8 w-8 text-primary"/>} isOpen={openSections.photos} onToggle={() => toggleSection('photos')} delay={2000}>
+                         <p className="text-secondary text-base">
+                            Want a soft copy of your photos from the event? Fill out the details below to request them on WhatsApp.
+                        </p>
+                        <div className="space-y-4 pt-4">
+                            <input type="text" value={photoRequestName} onChange={(e) => setPhotoRequestName(e.target.value)} placeholder="Your Full Name" required className="form-input" />
+                            <input type="text" value={photoRequestIdentification} onChange={(e) => setPhotoRequestIdentification(e.target.value)} placeholder="Identification (e.g., School, College, Work)" className="form-input" />
                         </div>
-                    </div>
+                        <div className="pt-4">
+                            <button onClick={handlePhotoRequest} disabled={!photoRequestName.trim()} className="inline-flex items-center justify-center btn-primary w-full">
+                                <WhatsAppIcon className="w-5 h-5 mr-2" />
+                                Request via WhatsApp
+                            </button>
+                        </div>
+                    </CollapsibleCard>
 
                     {/* --- WITH LOVE --- */}
                     <div className="pt-8 animate-fade-in" style={{ animationDelay: '2200ms' }}>
@@ -337,39 +347,49 @@ function App() {
                         </div>
                     </div>
 
-                    {/* --- SPECIAL THANKS --- */}
-                    <div className="pt-8 animate-fade-in" style={{ animationDelay: '2400ms' }}>
-                        <div className="glass-card p-6 sm:p-8 space-y-4">
-                            <div className="flex items-center justify-center gap-4">
-                                <SparklesIcon />
-                                <h2 className="font-cinzel-decorative text-2xl sm:text-3xl tracking-wider text-primary text-center">Special Thanks</h2>
+                    {/* --- EMERGENCY CONTACTS --- */}
+                    <CollapsibleCard title="Emergency Contacts" icon={<PhoneIcon />} isOpen={openSections.emergency} onToggle={() => toggleSection('emergency')} delay={2400}>
+                        <p className="text-secondary text-base text-center pb-4">
+                            For any urgent assistance on the wedding day, please feel free to reach out to our brothers.
+                        </p>
+                        <div className="space-y-3 text-left">
+                            <div className="flex justify-between items-center p-3 glass-card !rounded-xl">
+                                <span className="font-semibold text-lg text-primary">Aakash</span>
+                                <a href="tel:+918056181742" className="font-medium text-secondary tracking-wider">+91 80561 81742</a>
                             </div>
-                            <p className="text-secondary text-base text-center">
-                                We are incredibly grateful to the amazing vendors who helped bring our special day to life.
-                            </p>
-                            <div className="overflow-x-auto pt-4">
-                                <table className="w-full text-left text-secondary">
-                                    <thead className="text-sm text-primary uppercase">
-                                        <tr>
-                                            <th scope="col" className="px-4 py-3">Service</th>
-                                            <th scope="col" className="px-4 py-3">Name</th>
-                                            <th scope="col" className="px-4 py-3">Contact</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {specialThanksData.map((vendor, index) => (
-                                            <tr key={index} className="border-b border-primary/20 last:border-b-0">
-                                                <td className="px-4 py-3 font-semibold">{vendor.service}</td>
-                                                <td className="px-4 py-3">{vendor.name}</td>
-                                                <td className="px-4 py-3">{vendor.contact}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                            <div className="flex justify-between items-center p-3 glass-card !rounded-xl">
+                                <span className="font-semibold text-lg text-primary">Karthik</span>
+                                <a href="tel:+918056256239" className="font-medium text-secondary tracking-wider">+91 80562 56239</a>
                             </div>
                         </div>
-                    </div>
+                    </CollapsibleCard>
 
+                    {/* --- SPECIAL THANKS --- */}
+                    <CollapsibleCard title="Special Thanks" icon={<SparklesIcon />} isOpen={openSections.thanks} onToggle={() => toggleSection('thanks')} delay={2600}>
+                        <p className="text-secondary text-base text-center">
+                            We are incredibly grateful to the amazing vendors who helped bring our special day to life.
+                        </p>
+                        <div className="overflow-x-auto pt-4">
+                            <table className="w-full text-left text-secondary">
+                                <thead className="text-sm text-primary uppercase">
+                                    <tr>
+                                        <th scope="col" className="px-4 py-3">Service</th>
+                                        <th scope="col" className="px-4 py-3">Name</th>
+                                        <th scope="col" className="px-4 py-3">Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {specialThanksData.map((vendor, index) => (
+                                        <tr key={index} className="border-b border-primary/20 last:border-b-0">
+                                            <td className="px-4 py-3 font-semibold">{vendor.service}</td>
+                                            <td className="px-4 py-3">{vendor.name}</td>
+                                            <td className="px-4 py-3">{vendor.contact}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </CollapsibleCard>
                      <div className="h-40"></div>
                 </div>
             </main>
