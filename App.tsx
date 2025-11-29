@@ -201,7 +201,11 @@ function App() {
     ];
 
     const specialThanksData = [
-        { service: "Mandapam Booking", name: "xxx name", contact: "yyy Number" }, { service: "Decoration Booking", name: "xxx name", contact: "yyy Number" }, { service: "Invitation Printing", name: "xxx name", contact: "yyy Number" }, { service: "XY Photo & Videography", name: "xxx name", contact: "yyy Number" }, { service: "XY Catering Services", name: "xxx name", contact: "yyy Number" },
+        { service: "Mandapam", name: "Sampath", contact: "+91 7358405834" },
+        { service: "Decoration", name: "Mathi", contact: "+91 9444862951" },
+        { service: "Invitation Printing", name: "Prakash", contact: "+91 9884533736" },
+        { service: "Ashtag Photography", name: "Parvin", contact: "+91 9380132020" },
+        { service: "Saravana Catering", name: "Hari Prasad", contact: "+91 9840598878" },
     ];
 
 
